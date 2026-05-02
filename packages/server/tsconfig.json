@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./dist",
     // Environment Settings
     "module": "ESNext",
     "target": "ES2023",
