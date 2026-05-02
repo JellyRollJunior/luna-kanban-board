@@ -15,7 +15,8 @@
     "build": "tsc --build",
     "start": "node dist/src/server.js",
     "build-watch": "tsc --build --watch",
-    "start-watch": "node --watch dist/src/server.js"
+    "start-watch": "node --watch dist/src/server.js",
+    "prisma-generate": "prisma generate"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
