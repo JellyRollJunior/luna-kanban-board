@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
-import * as userQueries from '@/features/users/user.queries.js';
+import * as userQueries from '@/features/users/queries.js';
+import { mapUserToDto } from '../users/mapper';
 
 const postSignup = async (
     req: Request<
@@ -20,7 +21,9 @@ const postSignup = async (
             password,
             displayName
         );
-        res.json(newUser);
+
+        const output = mapUserToDto(newUser);
+        res.json(output);
     } catch (error) {
         next(error);
     }

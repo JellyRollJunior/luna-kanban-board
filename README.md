@@ -7,9 +7,7 @@
 | POST   | /auth/signup | Signup   | username, password, displayName |         | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
 
 # Todos
-
-- zod schema validation signup input
-- signup user Mapper + DTO
+- validate dto with schema
 - error handler
 
 - cors
