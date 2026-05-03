@@ -1,11 +1,12 @@
+import type { User } from '@prisma/client';
 import { prisma } from '@/db/prisma.js';
 
-const getUsers = async () => {
+const getUsers = async (): Promise<User[]> => {
     try {
         const data = await prisma.user.findMany();
-        console.log(data);
+        return data;
     } catch (error) {
-        console.log(error);
+        throw new Error('Unable to get users');
     }
 };
 
@@ -13,7 +14,7 @@ const createUser = async (
     username: string,
     password: string,
     displayName: string
-) => {
+): Promise<User> => {
     try {
         const data = await prisma.user.create({
             data: {
@@ -22,9 +23,9 @@ const createUser = async (
                 displayName,
             },
         });
-        console.log(data);
+        return data;
     } catch (error) {
-        console.log(error);
+        throw new Error('Unable to create user');
     }
 };
 
