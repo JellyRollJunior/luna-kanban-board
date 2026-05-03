@@ -1,8 +1,14 @@
-import { Router } from "express";
-import * as authController from '@/features/auth/auth.controller.js'
+import { Router } from 'express';
+import { signupInputSchema } from '@/features/auth/input.schema.js';
+import { validateBody } from '@/middleware/validate.js';
+import * as authController from '@/features/auth/auth.controller.js';
 
 const authRouter = Router();
 
-authRouter.post("/signup", authController.postSignup);
+authRouter.post(
+    '/signup',
+    validateBody(signupInputSchema),
+    authController.postSignup
+);
 
-export { authRouter}
+export { authRouter };
