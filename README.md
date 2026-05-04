@@ -8,6 +8,8 @@
 
 # Todos
 - error handler
+    -   Hook up handler and test
+    -   Remove schema safe parsing
 
 - cors
 - tests(?)
