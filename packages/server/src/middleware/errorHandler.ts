@@ -4,6 +4,16 @@ import { BaseError } from '@/errors/BaseError.js';
 import { ValidationError } from '@/errors/ValidationError.js';
 import { mapErrorToDto, mapValidationErrorToDto } from '@/errors/mapper.js';
 
+const errorHandler404 = (_req: Request, res: Response, _next: NextFunction) => {
+    const error404 = new BaseError(
+        '404 Not Found',
+        'Invalid route detected. Consult the README for a list of valid routes',
+        404
+    );
+    const errorDto = mapErrorToDto(error404);
+    res.status(errorDto.status).json(errorDto);
+};
+
 const errorHandler = (
     err: Errback,
     _req: Request,
@@ -25,4 +35,4 @@ const errorHandler = (
     }
 };
 
-export { errorHandler };
+export { errorHandler404, errorHandler };

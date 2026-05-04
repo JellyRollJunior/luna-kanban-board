@@ -1,6 +1,6 @@
 import express from 'express';
 import { authRouter } from '@/features/auth/router.js';
-import { errorHandler } from './middleware/errorHandler.js';
+import { errorHandler, errorHandler404 } from '@/middleware/errorHandler.js';
 
 const app = express();
 
@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/auth', authRouter);
 
 // error handlers
-app.use(errorHandler)
+app.use(/(.*)/, errorHandler404);
+app.use(errorHandler);
 
 export { app };

@@ -6,12 +6,8 @@ const validateRequestBody = <T>(
     validationSchema: ZodType<T, unknown>
 ): RequestHandler => {
     return (req: Request, _res: Response, next: NextFunction) => {
-        const result = validationSchema.safeParse(req.body);
-        if (!result.success) {
-            // throw validation error to next()
-            throw new Error('Internal server error');
-        }
-        req.body = result.data;
+        const data = validationSchema.parse(req.body);
+        req.body = data;
         next();
     };
 };
