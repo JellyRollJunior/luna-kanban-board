@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
+import { mapUserToDto } from '@/features/users/mapper.js';
+import { userDtoSchema } from '@/features/users/dto.schema.js';
 import * as userQueries from '@/features/users/queries.js';
-import { mapUserToDto } from '../users/mapper';
 
 const postSignup = async (
     req: Request<
@@ -12,18 +13,16 @@ const postSignup = async (
     next: NextFunction
 ) => {
     try {
-        const username = req.body.username;
-        const password = req.body.password;
-        const displayName = req.body.displayName;
-
+        const { username, password, displayName } = req.body;
         const newUser = await userQueries.createUser(
             username,
             password,
             displayName
         );
 
-        const output = mapUserToDto(newUser);
-        res.json(output);
+        const mappedOutput = mapUserToDto(newUser);
+        const validatedOutput = userDtoSchema.parse(mappedOutput);
+        res.json(validatedOutput);
     } catch (error) {
         next(error);
     }
