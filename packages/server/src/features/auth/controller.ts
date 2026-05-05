@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
+import bcrypt from 'bcryptjs';
 import { mapUserToDto } from '@/features/users/mapper.js';
 import { userDtoSchema } from '@/features/users/dto.schema.js';
 import * as userQueries from '@/features/users/queries.js';
@@ -14,9 +15,10 @@ const postSignup = async (
 ) => {
     try {
         const { username, password, displayName } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await userQueries.createUser(
             username,
-            password,
+            hashedPassword,
             displayName
         );
 
