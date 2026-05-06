@@ -9,3 +9,6 @@
 # Todos
 - cors
 - tests(?)
+
+# Learning Outcomes
+- Typing Express.User

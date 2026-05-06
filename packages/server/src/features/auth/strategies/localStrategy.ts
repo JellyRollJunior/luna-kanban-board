@@ -1,4 +1,5 @@
 import passportLocal from 'passport-local';
+import { mapUserToUserTokenPayload } from '@/features/auth/mapper.js';
 import * as userQueries from '@/features/users/queries.js';
 
 const LocalStrategy = passportLocal.Strategy;
@@ -10,12 +11,13 @@ const localConfig = new LocalStrategy(async (username, password, done) => {
         if (!data) {
             return done(null, false, { message: 'Unable to authenticate credentials', });
         }
-
         // verify passwords match
         if (password !== data.password) {
             return done(null, false, { message: 'Unable to authenticate credentials', });
         }
-        return done(null, data);
+
+        const userTokenPayload = mapUserToUserTokenPayload(data);
+        return done(null, userTokenPayload);
     } catch (err) {
         return done(err);
     }

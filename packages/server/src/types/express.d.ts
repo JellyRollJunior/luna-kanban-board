@@ -1,8 +1,7 @@
-// src/types/express.d.ts
-import type { User as PrismaUser } from '@prisma/client';
+import type { UserTokenPayload } from '@/features/auth/types.js';
 
 declare global {
     namespace Express {
-        interface User extends Pick<PrismaUser, 'id' | 'displayName'> {}
+        interface User extends UserTokenPayload {}
     }
 }
