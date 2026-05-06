@@ -6,7 +6,20 @@ const getUsers = async (): Promise<User[]> => {
         const data = await prisma.user.findMany();
         return data;
     } catch (error) {
-        throw new Error('Unable to get users');
+        throw new Error('Unable to fetch users');
+    }
+};
+
+const getUserByUsername = async (username: string): Promise<User | null> => {
+    try {
+        const data = await prisma.user.findUnique({
+            where: {
+                username,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new Error('Unable to fetch user');
     }
 };
 
@@ -29,4 +42,4 @@ const createUser = async (
     }
 };
 
-export { getUsers, createUser };
+export { getUsers, getUserByUsername, createUser };
