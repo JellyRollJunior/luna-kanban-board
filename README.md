@@ -10,5 +10,8 @@
 - cors
 - tests(?)
 
+- local strategy
+    - return jwt on successful auth
+
 # Learning Outcomes
 - Typing Express.User
