@@ -3,7 +3,7 @@ import { mapUserToUserTokenPayload } from '@/features/auth/mapper.js';
 import * as userQueries from '@/features/users/queries.js';
 
 const LocalStrategy = passportLocal.Strategy;
-const localConfig = new LocalStrategy(async (username, password, done) => {
+const localStrategy = new LocalStrategy(async (username, password, done) => {
     try {
         const data = await userQueries.getUserByUsername(username);
 
@@ -23,4 +23,4 @@ const localConfig = new LocalStrategy(async (username, password, done) => {
     }
 });
 
-export { localConfig }
+export { localStrategy }
