@@ -10,6 +10,19 @@ const getUsers = async (): Promise<User[]> => {
     }
 };
 
+const getUserById = async (id: string): Promise<User | null> => {
+    try {
+        const data = await prisma.user.findUnique({
+            where: {
+                id,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new Error('Unable to fetch user');
+    }
+};
+
 const getUserByUsername = async (username: string): Promise<User | null> => {
     try {
         const data = await prisma.user.findUnique({
@@ -42,4 +55,4 @@ const createUser = async (
     }
 };
 
-export { getUsers, getUserByUsername, createUser };
+export { getUsers, getUserById, getUserByUsername, createUser };

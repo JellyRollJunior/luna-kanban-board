@@ -18,3 +18,6 @@
 # Learning Outcomes
 
 - Typing Express.User
+- Implement authentication failure error response on a sessionless Passport Local configuration
+    - TAKEAWAY: Implementing username + password authentication w/ jwt from scratch is way easier than using passport local + jwt...
+    - Needed to write a custom callback to handle authentication failure error messages with sessionless passport local
