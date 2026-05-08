@@ -20,8 +20,8 @@ const localStrategy = new LocalStrategy(async (username, password, done) => {
 
         const userTokenPayload = mapUserToUserTokenPayload(data);
         return done(null, userTokenPayload);
-    } catch (err) {
-        return done(err);
+    } catch (error) {
+        return done(error);
     }
 });
 

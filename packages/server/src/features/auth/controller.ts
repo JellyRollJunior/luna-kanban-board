@@ -2,6 +2,8 @@ import type { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import { mapUserToDto } from '@/features/users/mapper.js';
 import { userDtoSchema } from '@/features/users/dto.schema.js';
+import { passport } from '@/features/auth/passport/passport.js';
+import { AuthenticationError } from '@/errors/AuthenticationError.js';
 import * as userQueries from '@/features/users/queries.js';
 
 const postSignup = async (
@@ -30,4 +32,25 @@ const postSignup = async (
     }
 };
 
-export { postSignup };
+/* Authenticate credentials & issue jwt on successful authentication */
+const postLogin = async (req: Request, res: Response, next: NextFunction) => {
+    const authMiddleware = passport.authenticate(
+        'local',
+        { session: false },
+        (
+            error: Error | null,
+            user: Express.User | false,
+            info: { message?: string } | null
+        ) => {
+            // This is executed after LocalStrategy. Parameters are sent through done callback
+            if (error) return next(error);
+            if (!user) return next(new AuthenticationError(info?.message ?? 'Internal server error'));
+            
+            // auth successful - issue token
+            res.json('authentication successful');
+        }
+    );
+    authMiddleware(req, res, next);
+};
+
+export { postSignup, postLogin };
