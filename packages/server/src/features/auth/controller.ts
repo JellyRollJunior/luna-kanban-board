@@ -43,7 +43,7 @@ const postLogin = async (req: Request, res: Response, next: NextFunction) => {
             user: Express.User | false,
             info: { message?: string } | null
         ) => {
-            // This is executed after LocalStrategy. Parameters are sent through done callback
+            // Executed after LocalStrategy. Parameters sent through LocalStrategy done callback
             if (error) return next(error);
             if (!user) return next(new AuthenticationError(info?.message ?? 'Internal server error'));
             

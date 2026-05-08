@@ -7,13 +7,11 @@
 | POST   | /auth/signup | Signup   | username, password, displayName | { displayName } | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
 | POST   | /auth/login  | Login    | username, password              | { token }       |                                                                                 |
 
-# Todos
+# Features
 
-- cors
-- tests(?)
-
-- local strategy
-    - return jwt on successful auth
+- Authentication
+    - Username + Password login
+    - jsonwebtoken endpoint authentication
 
 # Learning Outcomes
 
@@ -21,3 +19,8 @@
 - Implement authentication failure error response on a sessionless Passport Local configuration
     - TAKEAWAY: Implementing username + password authentication w/ jwt from scratch is way easier than using passport local + jwt...
     - Needed to write a custom callback to handle authentication failure error messages with sessionless passport local
+
+# Todos
+
+- cors
+- tests(?)
