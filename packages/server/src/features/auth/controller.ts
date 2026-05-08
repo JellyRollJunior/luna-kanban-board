@@ -4,6 +4,7 @@ import { mapUserToDto } from '@/features/users/mapper.js';
 import { userDtoSchema } from '@/features/users/dto.schema.js';
 import { passport } from '@/features/auth/passport/passport.js';
 import { AuthenticationError } from '@/errors/AuthenticationError.js';
+import { signToken } from '@/features/auth/passport/signToken.js';
 import * as userQueries from '@/features/users/queries.js';
 
 const postSignup = async (
@@ -46,8 +47,9 @@ const postLogin = async (req: Request, res: Response, next: NextFunction) => {
             if (error) return next(error);
             if (!user) return next(new AuthenticationError(info?.message ?? 'Internal server error'));
             
-            // auth successful - issue token
-            res.json('authentication successful');
+            // auth successful - sign token
+            const token = signToken(user);
+            res.json({ message: 'Authentication success', token });
         }
     );
     authMiddleware(req, res, next);

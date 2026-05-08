@@ -2,10 +2,10 @@
 
 ## Endpoints
 
-| Method | URI          | Function | Body (inputs)                   | Outputs | Notes                                                                           |
-| ------ | ------------ | -------- | ------------------------------- | ------- | ------------------------------------------------------------------------------- |
-| POST   | /auth/signup | Signup   | username, password, displayName |         | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
-| POST   | /auth/login  | Login    | username, password              |         |                                                                                 |
+| Method | URI          | Function | Body (inputs)                   | Outputs         | Notes                                                                           |
+| ------ | ------------ | -------- | ------------------------------- | --------------- | ------------------------------------------------------------------------------- |
+| POST   | /auth/signup | Signup   | username, password, displayName | { displayName } | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
+| POST   | /auth/login  | Login    | username, password              | { token }       |                                                                                 |
 
 # Todos
 
