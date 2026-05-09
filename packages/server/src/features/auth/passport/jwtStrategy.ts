@@ -10,7 +10,6 @@ const options: passportJwt.StrategyOptionsWithoutRequest = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env['TOKEN_SECRET'] ?? '',
 };
-
 const jwtStrategy = new JwtStrategy(
     options,
     async (tokenPayload: UserTokenPayload, done) => {

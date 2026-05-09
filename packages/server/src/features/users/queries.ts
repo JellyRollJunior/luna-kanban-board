@@ -36,6 +36,19 @@ const getUserByUsername = async (username: string): Promise<User | null> => {
     }
 };
 
+const getUserByGithubId = async (githubId: string): Promise<User | null> => {
+    try {
+        const data = await prisma.user.findUnique({
+            where: {
+                github_id: githubId,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new Error('Unable to fetch user');
+    }
+};
+
 const createUser = async (
     username: string,
     password: string,
@@ -55,4 +68,25 @@ const createUser = async (
     }
 };
 
-export { getUsers, getUserById, getUserByUsername, createUser };
+const createGithubUser = async (githubId: string, displayName: string) => {
+    try {
+        const data = await prisma.user.create({
+            data: {
+                github_id: githubId,
+                displayName: displayName,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new Error('Unable to create user');
+    }
+};
+
+export {
+    getUsers,
+    getUserById,
+    getUserByUsername,
+    getUserByGithubId,
+    createUser,
+    createGithubUser,
+};
