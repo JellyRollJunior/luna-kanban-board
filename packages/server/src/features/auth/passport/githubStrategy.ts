@@ -1,13 +1,14 @@
 import type { VerifyCallback } from 'passport-oauth2';
 import passportGithub from 'passport-github2';
+import { env } from '@/config/env.js';
 import { mapUserToUserTokenPayload } from '@/features/auth/mapper.js';
 import * as userQueries from '@/features/users/queries.js';
 
 const GithubStrategy = passportGithub.Strategy;
 
 const options: passportGithub.StrategyOptions = {
-    clientID: process.env['GITHUB_CLIENT_ID']!,
-    clientSecret: process.env['GITHUB_CLIENT_SECRET']!,
+    clientID: env.githubClientId,
+    clientSecret: env.githubClientSecret,
     callbackURL: 'http://localhost:3000/auth/github/callback',
 };
 const githubStrategy = new GithubStrategy(

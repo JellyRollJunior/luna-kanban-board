@@ -12,6 +12,7 @@
 # Features
 
 - Authentication
+    - GitHub oauth2 login/signup
     - Username + Password login
     - jsonwebtoken endpoint authentication
 
@@ -23,6 +24,8 @@
     - Needed to write a custom callback to handle authentication failure error messages with sessionless passport local
 - Implementing GitHub oauth2 using Passport
     - Testing oauth2 login (use a browser and goto the oauth route)
+- Env config file
+    - Throws error if necessary secrets are null
 
 # Todos
 

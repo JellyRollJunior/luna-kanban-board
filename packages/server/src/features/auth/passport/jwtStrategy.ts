@@ -1,5 +1,6 @@
 import type { UserTokenPayload } from '@/features/auth/types.js';
 import passportJwt from 'passport-jwt';
+import { env } from '@/config/env.js';
 import { mapUserToUserTokenPayload } from '@/features/auth/mapper.js';
 import * as userQueries from '@/features/users/queries.js';
 
@@ -8,7 +9,7 @@ const ExtractJwt = passportJwt.ExtractJwt;
 
 const options: passportJwt.StrategyOptionsWithoutRequest = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env['TOKEN_SECRET'] ?? '',
+    secretOrKey: env.tokenSecret ?? '',
 };
 const jwtStrategy = new JwtStrategy(
     options,

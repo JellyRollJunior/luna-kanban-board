@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import { env } from '@/config/env.js';
 import { passport } from '@/features/auth/passport/passport.js'
 import { authRouter } from '@/features/auth/router.js';
 import { errorHandler, errorHandler404 } from '@/middleware/errorHandler.js';
@@ -11,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // configure sessions for oauth
 app.use(session({
-    secret: process.env['SESSION_SECRET'] ?? '',
+    secret: env.sessionSecret ?? '',
     resave: false,
     saveUninitialized: false
 }));
