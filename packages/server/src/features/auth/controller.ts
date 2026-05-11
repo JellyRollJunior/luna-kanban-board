@@ -55,4 +55,24 @@ const postLogin = async (req: Request, res: Response, next: NextFunction) => {
     authMiddleware(req, res, next);
 };
 
-export { postSignup, postLogin };
+const getLoginGithubCallback = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    const authMiddleware = passport.authenticate(
+        'github',
+        { failureRedirect: '/' },
+        (error: Error, user: Express.User, info: { message?: string }) => {
+            // Executed after GithubStrategy
+            if (error) return next(error);
+            if (!user) return next(new AuthenticationError(info?.message ?? 'Error authenticating with GitHub'));
+            
+            const token = signToken(user);
+            res.json({ message: 'GitHub authentication success', token })
+        }
+    );
+    authMiddleware(req, res, next);
+};
+
+export { postSignup, postLogin, getLoginGithubCallback };
